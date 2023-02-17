@@ -1,27 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <!-- template using Bulma classes -->
+  <main class="columns is-gapless is-multiline">
+    <div class="column is-one-quarter">
+      <SideBar/>
+    </div>
+    <div class="column is-three-quarters">
+      <FormComponent/>
+    </div>
+  </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+// importing components
+import SideBar from './components/SideBar.vue';
+import FormComponent from './components/Form.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    SideBar,
+    FormComponent
   }
 });
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
