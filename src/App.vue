@@ -6,6 +6,7 @@
     </div>
     <div class="column is-three-quarters">
       <FormComponent/>
+      <!-- task list goes here -->
     </div>
   </main>
 </template>
