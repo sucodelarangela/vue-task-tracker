@@ -27,6 +27,8 @@ import Chronometer from './Chronometer.vue';
 
 export default defineComponent({
   name: 'TimerComponent',
+  // indicating that this component will emit something
+  emits: ['onTimerOff'],
   components: {
     Chronometer
   },
@@ -51,6 +53,10 @@ export default defineComponent({
       this.chronometerOn = false;
       // when clearing the interval, we use the ID for this specific setInterval
       clearInterval(this.chronometer);
+      // emitting the event to the parent element. Emit receives two parameters: the name of the event and the payload (the data that will be sent)
+      this.$emit('onTimerOff', this.timeInSeconds);
+      // when the timer is off, we reset the timer
+      this.timeInSeconds = 0;
     }
   }
 });

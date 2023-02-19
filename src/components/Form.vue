@@ -10,10 +10,13 @@
           type="text"
           class="input"
           placeholder="Qual tarefa você deseja iniciar?"
+          v-model="description"
         />
+        <!-- v-model links the value of the input with a state -->
       </div>
       <div class="column">
-        <TimerComponent />
+        <!-- when the timer is off, we want to end the task. 'onTimerOff' comes from the 'emits' of the Timer component -->
+        <TimerComponent @onTimerOff="endTask" />
       </div>
     </div>
   </div>
@@ -28,6 +31,17 @@ export default defineComponent({
   name: 'FormComponent',
   components: {
     TimerComponent
+  },
+  data() {
+    return {
+      description: ''
+    };
+  },
+  methods: {
+    endTask(timeInSeconds: number): void {
+      console.log(timeInSeconds, this.description);
+      this.description = '';
+    }
   }
 });
 </script>
