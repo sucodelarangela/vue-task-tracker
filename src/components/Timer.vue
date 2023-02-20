@@ -2,21 +2,18 @@
   <div class="is-flex is-align-items-center is-justify-content-space-between">
     <!-- importing the ChronoMeter component here and passing props -->
     <Chronometer :timeInSeconds="timeInSeconds" />
-    <!-- @click is used to pass a 'onClick' method -->
-    <button class="button" @click="startCount" :disabled="chronometerOn">
-      <span class="icon">
-        <i class="fas fa-play"></i>
-      </span>
-      <span>play</span>
-    </button>
-    <!-- @click is used to pass a 'onClick' method -->
-    <!-- ':' links the attribute to the state -->
-    <button class="button" @click="endCount" :disabled="!chronometerOn">
-      <span class="icon">
-        <i class="fas fa-stop"></i>
-      </span>
-      <span>stop</span>
-    </button>
+    <Button
+      @clicked="startCount"
+      icon="fas fa-play"
+      text="play"
+      :disabled="chronometerOn"
+    />
+    <Button
+      @clicked="endCount"
+      icon="fas fa-stop"
+      text="stop"
+      :disabled="!chronometerOn"
+    />
   </div>
 </template>
 
@@ -24,13 +21,15 @@
 // exporting the component
 import {defineComponent} from 'vue';
 import Chronometer from './Chronometer.vue';
+import Button from './Button.vue';
 
 export default defineComponent({
   name: 'TimerComponent',
   // indicating that this component will emit something
   emits: ['onTimerOff'],
   components: {
-    Chronometer
+    Chronometer,
+    Button
   },
   // passing states
   data() {
