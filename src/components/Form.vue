@@ -29,6 +29,7 @@ import TimerComponent from './Timer.vue';
 
 export default defineComponent({
   name: 'FormComponent',
+  emits: ['onSavingTask'],
   components: {
     TimerComponent
   },
@@ -39,7 +40,10 @@ export default defineComponent({
   },
   methods: {
     endTask(timeInSeconds: number): void {
-      console.log(timeInSeconds, this.description);
+      this.$emit('onSavingTask', {
+        durationInSeconds: timeInSeconds,
+        description: this.description
+      });
       this.description = '';
     }
   }
