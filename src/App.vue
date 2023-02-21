@@ -10,6 +10,8 @@
       <div class="list">
         <!-- dynamic rendering in Vue (using v-for) -->
         <Task v-for="(task, index) in tasks" :key="index" :task="task" />
+        <!-- if the task list is empty, renders this message instead -->
+        <Box v-if="isListEmpty"> Você não está muito produtivo hoje :( </Box>
       </div>
     </div>
   </main>
@@ -21,6 +23,7 @@ import {defineComponent} from 'vue';
 import SideBar from './components/SideBar.vue';
 import FormComponent from './components/Form.vue';
 import Task from './components/Task.vue';
+import Box from './components/Box.vue';
 import ITask from './interfaces/ITask';
 
 export default defineComponent({
@@ -28,7 +31,8 @@ export default defineComponent({
   components: {
     SideBar,
     FormComponent,
-    Task
+    Task,
+    Box
   },
   // defining states
   data() {
@@ -36,6 +40,12 @@ export default defineComponent({
       // returns an Array of Tasks
       tasks: [] as ITask[]
     };
+  },
+  // checks if the list of tasks is empty
+  computed: {
+    isListEmpty(): boolean {
+      return this.tasks.length === 0;
+    }
   },
   methods: {
     saveTask(task: ITask) {
@@ -46,7 +56,7 @@ export default defineComponent({
 </script>
 
 <style>
-.lista {
+.list {
   padding: 1.25rem;
 }
 </style>
