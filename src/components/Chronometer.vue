@@ -1,6 +1,6 @@
 <template>
   <section>
-    <strong>
+    <strong class="display">
       <!-- using states in Vue -->
       {{ timeSpent }}
     </strong>
@@ -28,3 +28,9 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+.display {
+  color: var(--primary-text);
+}
+</style>

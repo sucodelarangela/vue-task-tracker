@@ -1,10 +1,13 @@
 <template>
   <!-- template using Bulma classes -->
-  <main class="columns is-gapless is-multiline">
+  <main
+    class="columns is-gapless is-multiline"
+    :class="{'dark-mode': activeDarkMode}"
+  >
     <div class="column is-one-quarter">
-      <SideBar />
+      <SideBar @onThemeChange="changeTheme" />
     </div>
-    <div class="column is-three-quarters">
+    <div class="column is-three-quarters content">
       <FormComponent @onSavingTask="saveTask" />
       <!-- task list goes here -->
       <div class="list">
@@ -38,7 +41,8 @@ export default defineComponent({
   data() {
     return {
       // returns an Array of Tasks
-      tasks: [] as ITask[]
+      tasks: [] as ITask[],
+      activeDarkMode: false
     };
   },
   // checks if the list of tasks is empty
@@ -50,13 +54,30 @@ export default defineComponent({
   methods: {
     saveTask(task: ITask) {
       this.tasks.push(task);
+    },
+    changeTheme(activeDarkMode: boolean) {
+      this.activeDarkMode = activeDarkMode;
     }
   }
 });
 </script>
 
-<style>
+<style scoped>
 .list {
   padding: 1.25rem;
+}
+
+main {
+  --primary-bg: #fff;
+  --primary-text: #000;
+}
+
+main.dark-mode {
+  --primary-bg: #2b2d42;
+  --primary-text: #ddd;
+}
+
+.content {
+  background-color: var(--primary-bg);
 }
 </style>
