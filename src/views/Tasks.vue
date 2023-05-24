@@ -18,7 +18,7 @@ import Box from '../components/Box.vue';
 import ITask from '../interfaces/ITask';
 
 export default defineComponent({
-  name: 'App',
+  name: 'TasksView',
   components: {
     FormComponent,
     Task,
