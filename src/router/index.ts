@@ -21,4 +21,4 @@ const router = createRouter({
   routes
 });
 
-export default router;
+export default router; // to be imported in `main.ts`

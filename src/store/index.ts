@@ -11,7 +11,7 @@ interface State {
 // In case Symbol shows as an error, include in `tsconfig.json`, the lib ["ES2015"]
 export const key: InjectionKey<Store<State>> = Symbol();
 
-// Global states
+// Global states, to be imported on `main.ts`
 export const store = createStore<State>({
   state: {
     // Projects list
