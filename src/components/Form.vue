@@ -27,8 +27,9 @@
 // exporting the component
 import { computed, defineComponent } from 'vue';
 import TimerComponent from './Timer.vue';
-import { useStore } from 'vuex';
-import { key } from '@/store';
+import { useStore } from '@/store';
+// import { useStore } from 'vuex';
+// import { key } from '@/store';
 
 export default defineComponent({
   name: 'FormComponent',
@@ -55,7 +56,9 @@ export default defineComponent({
   },
   // using the global states configured in the Vuex Store the most modern way: with composition API setup() and `computed`
   setup() {
-    const store = useStore(key);
+    // const store = useStore(key);
+    // Replacing the useStore above for our custom useStore:
+    const store = useStore();
     return {
       projects: computed(() => store.state.projects)
     };

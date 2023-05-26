@@ -1,5 +1,5 @@
 import { InjectionKey } from 'vue';
-import { createStore, Store } from 'vuex';
+import { createStore, Store, useStore as vuexUseStore } from 'vuex';
 import IProject from '@/interfaces/IProject';
 
 
@@ -15,19 +15,22 @@ export const key: InjectionKey<Store<State>> = Symbol();
 export const store = createStore<State>({
   state: {
     // Projects list
-    projects: [
-      {
+    projects: []
+  },
+  // Mutations are responsible for changing the states
+  mutations: {
+    'ADD_PROJECT'(state, projectName: string) {
+      const project = {
         id: new Date().toISOString(),
-        name: 'TypeScript'
-      },
-      {
-        id: new Date().toISOString(),
-        name: 'Vue'
-      },
-      {
-        id: new Date().toISOString(),
-        name: 'Vuex'
-      },
-    ]
+        name: projectName
+      } as IProject;
+      state.projects.push(project);
+    }
   }
 });
+
+// We can setup the useStore(key) in a function to avoid repetition of ode in every component
+// In this case, when using the global states, we only need to import this function
+export function useStore(): Store<State> {
+  return vuexUseStore(key);
+}

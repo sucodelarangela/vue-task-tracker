@@ -29,26 +29,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import IProject from '../interfaces/IProject';
+import { computed, defineComponent } from 'vue';
+// import IProject from '../interfaces/IProject';
+import { useStore } from '@/store';
 
 export default defineComponent({
   name: 'ProjectsView',
   data() {
     return {
       projectName: '',
-      projects: [] as IProject[]
+      // After configuring the Vuex Store, we don't need to use this local state
+      // projects: [] as IProject[]
     };
   },
   methods: {
     save() {
-      const project: IProject = {
-        name: this.projectName,
-        id: new Date().toISOString()
-      };
-      this.projects.push(project);
+      // const project: IProject = {
+      //   name: this.projectName,
+      //   id: new Date().toISOString()
+      // };
+      // this.projects.push(project);
+      // After configuring the Vuex Store, we can save the project directly in it, by using the method `commit` to execute a mutation (it receives the name of the mutation and the project name)
+      this.store.commit('ADD_PROJECT', this.projectName);
       this.projectName = '';
     }
+  },
+  // 
+  setup() {
+    const store = useStore();
+    return {
+      store,
+      projects: computed(() => store.state.projects)
+    };
   }
 });
 </script>
