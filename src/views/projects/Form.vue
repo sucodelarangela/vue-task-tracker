@@ -1,6 +1,5 @@
 <template>
-  <section class="projects">
-    <h1 class="title">Projetos</h1>
+  <section>
     <!-- Listening to the submit event preventing the default behavior (event handling) -->
     <form @submit.prevent="save">
       <div class="field">
@@ -61,9 +60,3 @@ export default defineComponent({
   }
 });
 </script>
-
-<style scoped>
-.projects {
-  padding: 1.25rem;
-}
-</style>
