@@ -25,6 +25,11 @@
                 <i class="fas fa-pencil-alt"></i>
               </span>
             </RouterLink>
+            <button class="button ml-2 is-danger" @click="deleteProj(project.id)">
+              <span class="icon is-small">
+                <i class="fas fa-trash"></i>
+              </span>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -35,12 +40,19 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
 import { useStore } from '@/store';
+import { DELETE_PROJECT } from '@/store/mutation-types';
 
 export default defineComponent({
   name: 'ListView',
+  methods: {
+    deleteProj(id: string) {
+      this.store.commit(DELETE_PROJECT, id);
+    }
+  },
   setup() {
     const store = useStore();
     return {
+      store,
       projects: computed(() => store.state.projects)
     };
   }
