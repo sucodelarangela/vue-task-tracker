@@ -5,6 +5,7 @@
       <SideBar @onThemeChange="changeTheme" />
     </div>
     <div class="column is-three-quarters content">
+      <Notifications />
       <RouterView />
     </div>
   </main>
@@ -14,11 +15,13 @@
 import { defineComponent } from 'vue';
 // importing components
 import SideBar from './components/SideBar.vue';
+import Notifications from './components/Notifications.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
     SideBar,
+    Notifications
   },
   // defining states
   data() {
