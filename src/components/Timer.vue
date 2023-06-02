@@ -2,24 +2,14 @@
   <div class="is-flex is-align-items-center is-justify-content-space-between">
     <!-- importing the ChronoMeter component here and passing props -->
     <Chronometer :timeInSeconds="timeInSeconds" />
-    <Button
-      @clicked="startCount"
-      icon="fas fa-play"
-      text="play"
-      :disabled="chronometerOn"
-    />
-    <Button
-      @clicked="endCount"
-      icon="fas fa-stop"
-      text="stop"
-      :disabled="!chronometerOn"
-    />
+    <Button @clicked="startCount" icon="fas fa-play" text="play" :disabled="chronometerOn" />
+    <Button @clicked="endCount" icon="fas fa-stop" text="stop" :disabled="!chronometerOn" />
   </div>
 </template>
 
 <script lang="ts">
 // exporting the component
-import {defineComponent} from 'vue';
+import { defineComponent } from 'vue';
 import Chronometer from './Chronometer.vue';
 import Button from './Button.vue';
 

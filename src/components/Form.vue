@@ -28,6 +28,8 @@
 import { computed, defineComponent } from 'vue';
 import TimerComponent from './Timer.vue';
 import { useStore } from '@/store';
+import { NOTIFY } from '@/store/mutation-types';
+import { NotificationType } from '@/interfaces/INotifications';
 // import { useStore } from 'vuex';
 // import { key } from '@/store';
 
@@ -45,6 +47,15 @@ export default defineComponent({
   },
   methods: {
     endTask(timeInSeconds: number): void {
+      const project = this.projects.find(proj => proj.id === this.projectId);
+      if (!project) {
+        this.store.commit(NOTIFY, {
+          title: 'Ops!',
+          text: 'Selecione um projeto antes de finalizar a tarefa!',
+          type: NotificationType.FAILURE
+        });
+        return;
+      }
       this.$emit('onSavingTask', {
         durationInSeconds: timeInSeconds,
         description: this.description,
@@ -60,6 +71,7 @@ export default defineComponent({
     // Replacing the useStore above for our custom useStore:
     const store = useStore();
     return {
+      store,
       projects: computed(() => store.state.projects)
     };
   }
