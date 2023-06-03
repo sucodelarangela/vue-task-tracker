@@ -16,8 +16,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from '@/store';
-import { EDIT_PROJECT, ADD_PROJECT, NOTIFY } from '@/store/mutation-types';
+import { EDIT_PROJECT, ADD_PROJECT } from '@/store/mutation-types';
 import { NotificationType } from '@/interfaces/INotifications';
+import { notificationMixin } from '@/mixins/notify';
 
 export default defineComponent({
   name: 'FormView',
@@ -27,6 +28,8 @@ export default defineComponent({
       type: String
     }
   },
+  // mixins
+  mixins: [notificationMixin],
   // when the component is mounted, use the :id to find the project in the global state
   mounted() {
     if (this.id) {
@@ -50,13 +53,9 @@ export default defineComponent({
         this.store.commit(ADD_PROJECT, this.projectName);
       }
       this.projectName = '';
-      this.store.commit(NOTIFY, {
-        title: 'Novo projeto salvo.',
-        text: 'Prontinho ;) Seu projeto já está disponível.',
-        type: NotificationType.SUCCESS
-      });
+      this.notify(NotificationType.SUCCESS, 'Novo projeto salvo.', 'Prontinho ;) Seu projeto já está disponível.');
       this.$router.push('/projects');
-    }
+    },
   },
   // 
   setup() {

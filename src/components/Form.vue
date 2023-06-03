@@ -28,8 +28,9 @@
 import { computed, defineComponent } from 'vue';
 import TimerComponent from './Timer.vue';
 import { useStore } from '@/store';
-import { NOTIFY } from '@/store/mutation-types';
+// import { NOTIFY } from '@/store/mutation-types';
 import { NotificationType } from '@/interfaces/INotifications';
+import { notificationMixin } from '@/mixins/notify';
 // import { useStore } from 'vuex';
 // import { key } from '@/store';
 
@@ -45,15 +46,19 @@ export default defineComponent({
       projectId: ''
     };
   },
+  // mixins
+  mixins: [notificationMixin],
   methods: {
     endTask(timeInSeconds: number): void {
       const project = this.projects.find(proj => proj.id === this.projectId);
       if (!project) {
-        this.store.commit(NOTIFY, {
-          title: 'Ops!',
-          text: 'Selecione um projeto antes de finalizar a tarefa!',
-          type: NotificationType.FAILURE
-        });
+        // this.store.commit(NOTIFY, {
+        //   title: 'Ops!',
+        //   text: 'Selecione um projeto antes de finalizar a tarefa!',
+        //   type: NotificationType.FAILURE
+        // });
+        // Usando mixins
+        this.notify(NotificationType.FAILURE, 'Ops!', 'Selecione um projeto antes de finalizar a tarefa!');
         return;
       }
       this.$emit('onSavingTask', {
