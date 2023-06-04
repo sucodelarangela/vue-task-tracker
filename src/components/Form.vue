@@ -30,7 +30,8 @@ import TimerComponent from './Timer.vue';
 import { useStore } from '@/store';
 // import { NOTIFY } from '@/store/mutation-types';
 import { NotificationType } from '@/interfaces/INotifications';
-import { notificationMixin } from '@/mixins/notify';
+// import { notificationMixin } from '@/mixins/notify';
+import useNotificator from '@/hooks/notificator';
 // import { useStore } from 'vuex';
 // import { key } from '@/store';
 
@@ -46,8 +47,8 @@ export default defineComponent({
       projectId: ''
     };
   },
-  // mixins
-  mixins: [notificationMixin],
+  // mixins --> replaced by custom hook
+  // mixins: [notificationMixin],
   methods: {
     endTask(timeInSeconds: number): void {
       const project = this.projects.find(proj => proj.id === this.projectId);
@@ -75,8 +76,11 @@ export default defineComponent({
     // const store = useStore(key);
     // Replacing the useStore above for our custom useStore:
     const store = useStore();
+    // using custom hook
+    const { notify } = useNotificator();
     return {
       store,
+      notify,
       projects: computed(() => store.state.projects)
     };
   }

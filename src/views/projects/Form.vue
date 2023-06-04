@@ -18,7 +18,8 @@ import { defineComponent } from 'vue';
 import { useStore } from '@/store';
 import { EDIT_PROJECT, ADD_PROJECT } from '@/store/mutation-types';
 import { NotificationType } from '@/interfaces/INotifications';
-import { notificationMixin } from '@/mixins/notify';
+// import { notificationMixin } from '@/mixins/notify';
+import useNotificator from '@/hooks/notificator';
 
 export default defineComponent({
   name: 'FormView',
@@ -29,7 +30,7 @@ export default defineComponent({
     }
   },
   // mixins
-  mixins: [notificationMixin],
+  // mixins: [notificationMixin], // replaced by a custom hook
   // when the component is mounted, use the :id to find the project in the global state
   mounted() {
     if (this.id) {
@@ -60,8 +61,11 @@ export default defineComponent({
   // 
   setup() {
     const store = useStore();
+    // custom hook
+    const { notify } = useNotificator();
     return {
       store,
+      notify
     };
   }
 });
