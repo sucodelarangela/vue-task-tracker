@@ -17,7 +17,8 @@
       </div>
       <div class="column">
         <!-- when the timer is off, we want to end the task. 'onTimerOff' comes from the 'emits' of the Timer component -->
-        <TimerComponent @onTimerOff="endTask" />
+        <TimerComponent v-if="projectId" @onTimerOff="endTask" />
+        <p v-else>Crie ou selecione um projeto para começar.</p>
       </div>
     </div>
   </div>

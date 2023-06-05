@@ -4,6 +4,9 @@
       <div class="column is-7">
         {{ task.description || 'Tarefa sem descrição' }}
       </div>
+      <div class="column is-4">
+        {{ task.project?.name || 'N/D' }}
+      </div>
       <div class="column">
         <Chronometer :timeInSeconds="task.durationInSeconds" />
       </div>
@@ -12,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType} from 'vue';
+import { defineComponent, PropType } from 'vue';
 import Chronometer from './Chronometer.vue';
 import Box from './Box.vue';
 import ITask from '@/interfaces/ITask';
